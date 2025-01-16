@@ -10,7 +10,6 @@ def music():
 
 def main():
     pygame.init()
-    clock = pygame.time.Clock()
     game_font = pygame.font.SysFont("arial", 30)
 
     laser_sound = pygame.mixer.Sound('sound/laser.wav')                             #Sounds
@@ -33,12 +32,12 @@ def main():
     laser_image = pygame.image.load('image/laser.png')
     laser_width, laser_height = laser_image.get_size()
     launched_lasers = []
-    laser_step = 1
+    laser_step = 10
 
     chicken_image = pygame.image.load('image/chicken.png')
     chicken_width, chicken_height = chicken_image.get_size()
     chicken_x, chicken_y = randint(0, screen_wight - chicken_width), 0
-    chicken_step = 0.1
+    chicken_step = 1
 
     game_score = 0
 
@@ -73,8 +72,8 @@ def main():
                 hit_sound.play()
                 game_score += 1
                 chicken_x, chicken_y = randint(0, screen_wight - chicken_width), 0
-                if chicken_step < 0.9:
-                    chicken_step += 0.02
+                if chicken_step < 9:
+                    chicken_step += 0.2
 
 
         screen.blit(background, (0, 0))
@@ -90,7 +89,7 @@ def main():
         pygame.display.update()
 
 
-        pygame.time.Clock().tick(1200)  #FPS_lock
+        pygame.time.Clock().tick(120)  #FPS_lock
 
         if chicken_y + chicken_height > ship_y:
             game_over_text = game_font.render(f"Game Over", True, 'white')

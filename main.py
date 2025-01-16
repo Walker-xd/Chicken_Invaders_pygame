@@ -29,17 +29,17 @@ def main():
     ship_width, ship_height = space_ship_image.get_size()
     ship_x, ship_y = screen_wight / 2 - ship_width / 2, screen_height - ship_height
     ship_move_left, ship_move_right = False, False
-    ship_step = 1
+    ship_step = 10
 
     laser_image = pygame.image.load('image/laser.png')
     laser_width, laser_height = laser_image.get_size()
     launched_lasers = []
-    laser_step = 1
+    laser_step = 10
 
     chicken_image = pygame.image.load('image/chicken.png')
     chicken_width, chicken_height = chicken_image.get_size()
     chicken_x, chicken_y = randint(0, screen_wight - chicken_width), 0
-    chicken_step = 0.11
+    chicken_step = 1.1
 
     game_score = 0
     while True:
@@ -58,7 +58,6 @@ def main():
                     laser_sound.play()
                     laser_x, laser_y = ship_x + ship_width / 2 - laser_width / 2, ship_y - ship_height / 2
                     launched_lasers.append([laser_x,laser_y])
-                    ship_x += 0.1
 
 
             if i.type == pygame.KEYUP:                                              #Unpressing Key
@@ -85,8 +84,8 @@ def main():
                 hit_sound.play()
                 game_score += 1
                 chicken_x, chicken_y = randint(0, screen_wight - chicken_width), 0
-                if chicken_step < 0.35:
-                    chicken_step += 0.02
+                if chicken_step < 3.5:
+                    chicken_step += 0.2
 
 
         screen.blit(background, (0, 0))
@@ -98,7 +97,7 @@ def main():
         screen.blit(score_text, (screen_wight - 200, 10))
         pygame.display.update()
 
-        pygame.time.Clock().tick(1200)  #FPS_lock
+        pygame.time.Clock().tick(120)  #FPS_lock
 
         if chicken_y + chicken_height > ship_y:
             game_over_text = game_font.render(f"Game Over", True, 'white')
